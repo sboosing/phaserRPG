@@ -21,7 +21,7 @@ class GameScene extends Phaser.Scene {
 
     create() {
         // this.cursors = this.input.keyboard.createCursorKeys()
-        const {LEFT,RIGHT,UP,DOWN,W,A,S,D} = Phaser.Input.Keyboard.KeyCodes
+        const {LEFT, RIGHT, UP, DOWN, W, A, S, D} = Phaser.Input.Keyboard.KeyCodes
         this.keys = this.input.keyboard.addKeys({
             left: LEFT,
             right: RIGHT,
@@ -32,7 +32,7 @@ class GameScene extends Phaser.Scene {
             s: S,
             d: D
         })
-       const map = this.make.tilemap({
+        const map = this.make.tilemap({
             key: 'map'
         })
 
@@ -57,69 +57,15 @@ class GameScene extends Phaser.Scene {
             collidingTileColor: new Phaser.Display.Color(0, 0, 255),
             faceColor: new Phaser.Display.Color(0, 255, 0, 255)
         })
-
         ///////////////////////////////
         //player
         this.player = this.physics.add.sprite(200,120, 'characters')
         this.physics.add.collider(this.player, worldLayer)
         this.cameras.main.startFollow(this.player, true, 0.8, 0.8)
         this.player.body.setCollideWorldBounds(true)
+    }//end create
 
-        const animFrameRate = 8
-        this.anims.create({
-            key: 'player-left',
-            frames: this.anims.generateFrameNumbers('characters', {
-                // start: 3,
-                // end: 5
-                start: 60,
-                end: 62
-            }),
-            frameRate: animFrameRate,
-            repeat: -1
-        })
-        this.anims.create({
-            key: 'player-right',
-            frames: this.anims.generateFrameNumbers('characters', {
-                // start: 6,
-                // end: 8
-                start: 72,
-                end: 74
-            }),
-            frameRate: animFrameRate,
-            repeat: -1
-        })
-        this.anims.create({
-            key: 'player-up',
-            frames: this.anims.generateFrameNumbers('characters', {
-                // start: 9,
-                // end: 11
-                start: 84,
-                end: 86
-            }),
-            frameRate: animFrameRate,
-            repeat: -1
-        })
-        this.anims.create({
-            key: 'player-down',
-            frames: this.anims.generateFrameNumbers('characters', {
-                // start: 0,
-                // end: 2
-                start: 48,
-                end: 50
-            }),
-            frameRate: animFrameRate,
-            repeat: -1
-        })
-        this.idleFrame = {
-            down: 49,
-            left: 61,
-            right: 73,
-            up: 85
-        }
-        this.player.setFrame(this.idleFrame.down)
-    } //end create
 
- 
     update(time, delta) {
         const {keys} = this //output: this.keys
         const speed = 100
